@@ -6,8 +6,8 @@ fetch(
 )
   .then((response) => response.json())
   .then((data) => {
-    console.log(data);
-  });
+    console.log(data)
+  })
 
 // for (let index = 0; index < data.subcategories.length; index++) {
 //   const category = data.subcategories[index];
