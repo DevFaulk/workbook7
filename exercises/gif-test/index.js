@@ -9,10 +9,3 @@ fetch(
   .then((data) => {
     console.log(data)
   })
-
-// for (let index = 0; index < data.subcategories.length; index++) {
-//   const category = data.subcategories[index];
-//   let opt = new Option(option);
-//   opt.innerText = category.name;
-//   opt.value = category.name;
-//   categorySelect.appendChild(opt);
