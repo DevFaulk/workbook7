@@ -14,18 +14,19 @@ async function start() {
 start();
 
 function createCategoryList(category) {
-    console.log(category)
+  console.log(category);
   const opt = new Option(Option);
-  opt.value = category.gif.url;
+  opt.value = category.gif.embed_url;
   opt.innerHTML = category.name;
   categoryDropdown.appendChild(opt);
 }
 
 function loadGifs(gif) {
+  let img;
   if (gif.value != 'select') {
     if (gif) {
-      let img = new Image(Image);
-      img.style = 'width: 200px; height: 100px';
+      img = new Image(img);
+      img.style = 'width: 480px; height: 270px';
       img.src = gif.value;
       loadImage.appendChild(img);
     }
