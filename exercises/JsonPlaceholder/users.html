@@ -14,12 +14,21 @@
       </nav>
     </header>
     <main>
-      <input type="text" class="todo-input" id="todoInput" />
-      <button type="button" id="submitTodo" onclick="fetchTodo()">
-        Submit
-      </button>
-      <div class="todo-display" id="todoData"></div>
+      <select type="text" id="userDropdown">
+        <option value="select">Select a user...</option>
+      </select>
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Phone</th>
+          <th>Website</th>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
     </main>
-    <script src="scripts/todo-responssive.js"></script>
+    <script src="scripts/users.js"></script>
   </body>
 </html>
