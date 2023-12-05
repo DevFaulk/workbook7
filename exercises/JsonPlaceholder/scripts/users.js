@@ -9,7 +9,6 @@ function loadDropdown(data) {
     option.value = user.name;
     option.innerText = user.name;
     userDropdown.appendChild(option);
-    console.log(user);
   }
 }
 
@@ -25,14 +24,17 @@ function displayTable(user) {
   if (user.address) {
     let addressCell = row.insertCell();
     if (user.address.suite) {
-      addressCell.innerText =
-        user.address.city + user.address.street + user.address.suite;
-    } else addressCell.innerText = user.address.city + user.address.street;
+      addressCell.innerText = `${user.address.city} ${user.address.street} ${user.address.suite}`;
+    } else
+      addressCell.innerText = `${user.address.city} ${user.address.street}`;
   }
   let phoneCell = row.insertCell();
   phoneCell.innerText = user.phone;
   let websiteCell = row.insertCell();
-  websiteCell.innerText = user.website;
+  let link = document.createElement('a');
+  link.href = user.website;
+  link.innerText = user.website;
+  websiteCell.appendChild(link);
 }
 
 window.onload = async function () {
