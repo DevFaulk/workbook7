@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do Page</title>
+    <link rel="stylesheet" href="styles/preface.css" />
+
+    <style>
+      button:hover {
+        background-color: rgb(34, 140, 104) !important;
+        filter: drop-shadow(6px) !important;
+      }
+    </style>
+  </head>
+  <body class="container">
+    <header>
+      <nav>
+        <a href="index.html">Home Page</a>
+        <a href="todo-responsive.html">To-Do Page</a>
+        <a href="users.html">User Page</a>
+      </nav>
+    </header>
+    <main>
+      <input type="text" class="todo-input" id="todoInput" />
+      <button
+        style="background-color: beige"
+        type="button"
+        id="submitTodo"
+        onclick="fetchTodo()">
+        Submit
+      </button>
+      <div class="todo-display" id="todoData"></div>
+    </main>
+    <script src="scripts/todo-responsive.js"></script>
+  </body>
+</html>

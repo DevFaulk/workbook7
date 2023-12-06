@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do Page</title>
+    <link rel="stylesheet" href="styles/preface.css" />
+  </head>
+  <body class="container">
+    <header>
+      <nav>
+        <a href="index.html">Home Page</a>
+        <a href="todo-responsive.html">To-Do Page</a>
+        <a href="users.html">User Page</a>
+      </nav>
+    </header>
+    <main>
+      <select type="text" id="userDropdown">
+        <option value="select">Select a user...</option>
+      </select>
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Phone</th>
+          <th>Website</th>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </main>
+    <script src="scripts/users.js"></script>
+  </body>
+</html>
