@@ -110,7 +110,7 @@ function createWeatherInHTML(days) {
       day.appendChild(condition);
       let temperature = document.createElement('div');
       temperature.className = 'temperature';
-      temperature.innerText = `Temperature: ${days[i].temperature}`;
+      temperature.innerText = `Temperature: ${days[i].temperature}\u00B0 F`;
       day.appendChild(temperature);
       let winds = document.createElement('div');
       winds.className = 'winds';
@@ -158,7 +158,7 @@ function createWeatherInHTML(days) {
       night.appendChild(condition);
       let temperature = document.createElement('div');
       temperature.className = 'temperature';
-      temperature.innerText = `Temperature: ${days[i].temperature}`;
+      temperature.innerText = `Temperature: ${days[i].temperature}\u00B0 F`;
       night.appendChild(temperature);
       let winds = document.createElement('div');
       winds.className = 'winds';
