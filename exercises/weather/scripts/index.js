@@ -50,6 +50,8 @@ const cities = [
   { name: 'Madison, WI', lat: 43.0746, long: -89.384 },
   { name: 'Cheyenne, WY', lat: 41.1399, long: -104.8202 },
 ];
+const currentWeather = document.getElementById('currentWeather');
+const forecastWeather = document.getElementById('forecastWeather');
 /* dropdown ---------------------- dropdown */
 
 const cityDropdown = document.getElementById('cityDropdown');
@@ -80,7 +82,59 @@ async function fetchData() {
 
 /* load weather ---------------------- load weather */
 
+function createWeatherInHTML(days) {
+  for (let i = 0; i < days.length; i++) {
+    if (days[0]) {
+      let day = document.createElement('div');
+      day.className = 'day-weather';
+      if (days.number == 1) {
+        currentWeather.appendChild(day);
+        let img = document.createElement('div')
+        img.className = 'icon'
+        img.style = `background-image: url("${days.icon}")`
+        day.appendChild(img)
+        let condition = document.createElement('div');
+        condition.innerText = days.shortForecast;
+        day.appendChild(condition)
+      } else {
+        forecastWeather.appendChild(day);
+      }
+    } else {
+      let night = document.createElement('div');
+      night.className = 'night-weather';
+      if (days.number == 2) {
+        currentWeather.appendChild(night);
+      } else {
+        forecastWeather.appendChild(night);
+      }
+    }
+  }
+}
 
+function loaWeather(card) {
+  fetchData().then((forecast) => {
+    switch (card) {
+      case 1:
+        createWeatherInHTML(forecast.slice(0, 2));
+        break;
+      case 2:
+        createWeatherInHTML(forecast.slice(2, 4));
+        break;
+      case 3:
+        createWeatherInHTML(forecast.slice(4, 6));
+        break;
+      case 4:
+        createWeatherInHTML(forecast.slice(6, 8));
+        break;
+      case 5:
+        createWeatherInHTML(forecast.slice(8, 10));
+        break;
+      default:
+        alert('Error making html');
+        break;
+    }
+  });
+}
 
 function loadWeather() {
   fetchData().then((forecast) => {
@@ -88,4 +142,10 @@ function loadWeather() {
   });
 }
 
-cityDropdown.onchange = loadWeather;
+cityDropdown.onchange = function () {
+  loadWeather(1);
+  loadWeather(2);
+  loadWeather(3);
+  loadWeather(4);
+  loadWeather(5);
+};
