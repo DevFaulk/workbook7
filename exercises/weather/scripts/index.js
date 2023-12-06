@@ -120,11 +120,14 @@ function createWeatherInHTML(days) {
       let precipitation = document.createElement('div');
       precipitation.className = 'precipitation';
       if (
-        precipProbability.value !== null ||
-        precipProbability.value !== undefined
+        precipProbability.value != null ||
+        precipProbability.value != undefined
       ) {
         precipitation.innerText = `Probability of precipitation: ${precipProbability.value}%`;
-      } else {
+      } else if (
+        precipProbability.value == null ||
+        precipProbability.value == undefined
+      ) {
         precipitation.innerText = `Probability of precipitation: 0%`;
       }
       day.appendChild(precipitation);
@@ -161,11 +164,14 @@ function createWeatherInHTML(days) {
       let precipitation = document.createElement('div');
       precipitation.className = 'precipitation';
       if (
-        precipProbability.value !== null ||
-        precipProbability.value !== undefined
+        precipProbability.value != null ||
+        precipProbability.value != undefined
       ) {
         precipitation.innerText = `Probability of precipitation: ${precipProbability.value}%`;
-      } else {
+      } else if (
+        precipProbability.value == null ||
+        precipProbability.value == undefined
+      ) {
         precipitation.innerText = `Probability of precipitation: 0%`;
       }
       night.appendChild(precipitation);
