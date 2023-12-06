@@ -52,6 +52,7 @@ const cities = [
 ];
 const currentWeather = document.getElementById('currentWeather');
 const forecastWeather = document.getElementById('forecastWeather');
+const weatherCard = document.getElementById('weatherCard');
 /* dropdown ---------------------- dropdown */
 
 const cityDropdown = document.getElementById('cityDropdown');
@@ -84,34 +85,95 @@ async function fetchData() {
 
 function createWeatherInHTML(days) {
   for (let i = 0; i < days.length; i++) {
-    if (days[0]) {
+    let weatherCard = document.createElement('div');
+    weatherCard.className = 'card';
+    if (days[i][0]) {
       let day = document.createElement('div');
       day.className = 'day-weather';
-      if (days.number == 1) {
-        currentWeather.appendChild(day);
-        let img = document.createElement('div')
-        img.className = 'icon'
-        img.style = `background-image: url("${days.icon}")`
-        day.appendChild(img)
-        let condition = document.createElement('div');
-        condition.innerText = days.shortForecast;
-        day.appendChild(condition)
+      if (days[i].number == 1) {
+        currentWeather.appendChild(weatherCard);
+        weatherCard.appendChild(day);
       } else {
-        forecastWeather.appendChild(day);
+        forecastWeather.appendChild(weatherCard);
+        weatherCard.appendChild(day);
+        let timeName = document.createElement('h4');
+        timeName.className = 'time-of-day';
+        timeName.innerText = days[i].name;
+        day.appendChild(timeName);
       }
+      let precipProbability = days[i].probabilityOfPrecipitation;
+      let img = document.createElement('div');
+      img.className = 'icon';
+      img.style = `background-image: url("${days[i].icon}")`;
+      day.appendChild(img);
+      let condition = document.createElement('div');
+      condition.innerText = days[i].shortForecast;
+      condition.className = 'sky-condition';
+      day.appendChild(condition);
+      let temperature = document.createElement('div');
+      temperature.className = 'temperature';
+      temperature.innerText = `Temperature: ${days[i].temperature}`;
+      day.appendChild(temperature);
+      let winds = document.createElement('div');
+      winds.className = 'winds';
+      winds.innerText = `Winds: ${days[i].windDirection} - ${days[i].windSpeed}`;
+      let precipitation = document.createElement('div');
+      precipitation.className = 'precipitation';
+      if (
+        precipProbability.value !== null ||
+        precipProbability.value !== undefined
+      ) {
+        precipitation.innerText = `Probability of precipitation: ${precipProbability.value}%`;
+      } else {
+        precipitation.innerText = `Probability of precipitation: 0%`;
+      }
+      day.appendChild(precipitation);
     } else {
       let night = document.createElement('div');
       night.className = 'night-weather';
-      if (days.number == 2) {
-        currentWeather.appendChild(night);
+      if (days[i].number == 2) {
+        currentWeather.appendChild(weatherCard);
+        weatherCard.appendChild(night);
       } else {
-        forecastWeather.appendChild(night);
+        forecastWeather.appendChild(weatherCard);
+        weatherCard.appendChild(night);
+        let timeName = document.createElement('h4');
+        timeName.className = 'time-of-day';
+        timeName.innerText = days[i].name;
+        night.appendChild(timeName);
       }
+      let precipProbability = days[i].probabilityOfPrecipitation;
+      let img = document.createElement('div');
+      img.className = 'icon';
+      img.style = `background-image: url("${days[i].icon}")`;
+      night.appendChild(img);
+      let condition = document.createElement('div');
+      condition.innerText = days[i].shortForecast;
+      condition.className = 'sky-condition';
+      night.appendChild(condition);
+      let temperature = document.createElement('div');
+      temperature.className = 'temperature';
+      temperature.innerText = `Temperature: ${days[i].temperature}`;
+      night.appendChild(temperature);
+      let winds = document.createElement('div');
+      winds.className = 'winds';
+      winds.innerText = `Winds: ${days[i].windDirection} - ${days[i].windSpeed}`;
+      let precipitation = document.createElement('div');
+      precipitation.className = 'precipitation';
+      if (
+        precipProbability.value !== null ||
+        precipProbability.value !== undefined
+      ) {
+        precipitation.innerText = `Probability of precipitation: ${precipProbability.value}%`;
+      } else {
+        precipitation.innerText = `Probability of precipitation: 0%`;
+      }
+      night.appendChild(precipitation);
     }
   }
 }
 
-function loaWeather(card) {
+function loadWeather(card) {
   fetchData().then((forecast) => {
     switch (card) {
       case 1:
@@ -136,16 +198,18 @@ function loaWeather(card) {
   });
 }
 
-function loadWeather() {
-  fetchData().then((forecast) => {
-    console.log(forecast);
-  });
-}
-
 cityDropdown.onchange = function () {
-  loadWeather(1);
-  loadWeather(2);
-  loadWeather(3);
-  loadWeather(4);
-  loadWeather(5);
+  if (cityDropdown.value == 'select') {
+    weatherCard.style.display = 'none';
+  }
+  if (cityDropdown.value != 'select') {
+    weatherCard.style.display = 'block';
+    currentWeather.innerHTML = ' ';
+    forecastWeather.innerHTML = ' ';
+    loadWeather(1);
+    loadWeather(2);
+    loadWeather(3);
+    loadWeather(4);
+    loadWeather(5);
+  }
 };
