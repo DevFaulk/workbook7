@@ -53,6 +53,7 @@ const cities = [
 const currentWeather = document.getElementById('currentWeather');
 const forecastWeather = document.getElementById('forecastWeather');
 const weatherCard = document.getElementById('weatherCard');
+let locationName = document.getElementById('location');
 /* dropdown ---------------------- dropdown */
 
 const cityDropdown = document.getElementById('cityDropdown');
@@ -90,17 +91,14 @@ function createWeatherInHTML(days) {
     if (days[i][0]) {
       let day = document.createElement('div');
       day.className = 'day-weather';
-      if (days[i].number == 1) {
-        currentWeather.appendChild(weatherCard);
-        weatherCard.appendChild(day);
-      } else {
-        forecastWeather.appendChild(weatherCard);
-        weatherCard.appendChild(day);
-        let timeName = document.createElement('h4');
-        timeName.className = 'time-of-day';
-        timeName.innerText = days[i].name;
-        day.appendChild(timeName);
-      }
+
+      forecastWeather.appendChild(weatherCard);
+      weatherCard.appendChild(day);
+      let timeName = document.createElement('h4');
+      timeName.className = 'time-of-day';
+      timeName.innerText = days[i].name;
+      day.appendChild(timeName);
+
       let precipProbability = days[i].probabilityOfPrecipitation;
       let img = document.createElement('div');
       img.className = 'icon';
@@ -137,6 +135,10 @@ function createWeatherInHTML(days) {
       if (days[i].number == 2) {
         currentWeather.appendChild(weatherCard);
         weatherCard.appendChild(night);
+        let timeName = document.createElement('h4');
+        timeName.className = 'time-of-day';
+        timeName.innerText = days[i].name;
+        night.appendChild(timeName);
       } else {
         forecastWeather.appendChild(weatherCard);
         weatherCard.appendChild(night);
@@ -183,7 +185,7 @@ function loadWeather(card) {
   fetchData().then((forecast) => {
     switch (card) {
       case 1:
-        createWeatherInHTML(forecast.slice(0, 2));
+        createWeatherInHTML(forecast.slice(1, 2));
         break;
       case 2:
         createWeatherInHTML(forecast.slice(2, 4));
@@ -209,6 +211,11 @@ cityDropdown.onchange = function () {
     weatherCard.style.display = 'none';
   }
   if (cityDropdown.value != 'select') {
+    for (const city of cities) {
+      if (`${city.lat},${city.long}` == cityDropdown.value) {
+        locationName.innerText = city.name;
+      }
+    }
     weatherCard.style.display = 'block';
     currentWeather.innerHTML = ' ';
     forecastWeather.innerHTML = ' ';
