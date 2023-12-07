@@ -54,11 +54,9 @@ let locationName = document.getElementById('location');
 let currentWeather = document.getElementById('currentWeather');
 let forecastWeather = {
   1: document.getElementById('forecastWeather1'),
-  2: document.getElementById('forecastWeather2'),
-  3: document.getElementById('forecastWeather3'),
-  4: document.getElementById('forecastWeather4'),
-  5: document.getElementById('forecastWeather5'),
-  6: document.getElementById('forecastWeather6'),
+  3: document.getElementById('forecastWeather2'),
+  5: document.getElementById('forecastWeather3'),
+  7: document.getElementById('forecastWeather4'),
 };
 /* dropdown ---------------------- dropdown */
 
@@ -111,8 +109,9 @@ function loadWeather() {
         windSpeed: 'None forecasted',
       });
     }
-    for (let i = 0; i < 7; i++) {
-      if (days[i].name.includes('Tonight') == true) {
+    for (let i = 0; i < 9; i++) {
+      //tonight
+      if (i == 0) {
         //create div in weatherCard variable
         let night = document.createElement('div');
         night.className = 'night-weather';
@@ -168,11 +167,12 @@ function loadWeather() {
         // append that variable to night div
         night.appendChild(precipitation);
       }
-      if (days[i].name.includes('Night') == true) {
+      //night forecast
+      if (/*night forecast day 1*/ i == 2 || i == 4 || i == 6 || i == 8) {
         let night = document.createElement('div');
         night.className = 'night-weather';
         // append night div to weatherCard div
-        forecastWeather[i].appendChild(night);
+        forecastWeather[i - 1].appendChild(night);
         // create h4 in timeName variable
         let timeName = document.createElement('h4');
         timeName.className = 'time-of-day';
@@ -223,8 +223,8 @@ function loadWeather() {
         // append that variable to night div
         night.appendChild(precipitation);
       }
-      if (i >= 3 && days[i].name.includes('Night') == false) {
-        console.log(forecastWeather[i - 1]);
+      // day forecast after day 2
+      if (i == 3 || i == 5 || i == 7) {
         //create div in day variable
         let day = document.createElement('div');
         day.className = 'day-weather';
@@ -280,6 +280,7 @@ function loadWeather() {
         // append that variable to day div
         day.appendChild(precipitation);
       }
+      // day 1 forecast
       if (i == 1) {
         //create div in day variable
         let day = document.createElement('div');
