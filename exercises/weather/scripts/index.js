@@ -83,154 +83,126 @@ async function fetchData() {
 
 /* load weather ---------------------- load weather */
 
-function createWeatherInHTML(days) {
-  for (let i = 0; i < days.length; i++) {
-    let tonight = function () {
-      if (days[i].name == tonight && days[i].number == 2) {
-        tonight = days[i].number == 2;
-      } else if (days[i].name == tonight && days[i].number == 1) {
-        tonight = days[i].number == 1;
-      }
-    };
-    if (i == 0 && !tonight) {
-      /* if is day index */
-      //create div in weatherCard variable
-      let weatherCard = document.createElement('div');
-      weatherCard.className = 'card';
-      weatherCard.id = 'weatherCard';
-      //create div in day variable
-      let day = document.createElement('div');
-      day.className = 'day-weather';
-      // append weatherCard div to forecastWeather div
-      forecastWeather.appendChild(weatherCard);
-      // append day div to weatherCard div
-      weatherCard.appendChild(day);
-      // create h4 in timeName variable
-      let timeName = document.createElement('h4');
-      timeName.className = 'time-of-day';
-      timeName.innerText = days[i].name;
-      // append timeName h4 to day div
-      day.appendChild(timeName);
-      // define precipProbability variable
-      let precipProbability = days[i].probabilityOfPrecipitation;
-      // create div in img variable that displays icon
-      let img = document.createElement('div');
-      img.className = 'icon';
-      img.style = `background-image: url("${days[i].icon}")`;
-      // append img (div) to day variable
-      day.appendChild(img);
-      // create div in condition variable
-      let condition = document.createElement('div');
-      condition.innerText = days[i].shortForecast;
-      condition.className = 'sky-condition';
-      // append condition div to day div
-      day.appendChild(condition);
-      // create div in temperature variable
-      let temperature = document.createElement('div');
-      temperature.className = 'temperature';
-      temperature.innerText = `Temperature: ${days[i].temperature}\u00B0 F`;
-      // append temperature div to day div
-      day.appendChild(temperature);
-      // create div in winds variable
-      let winds = document.createElement('div');
-      winds.className = 'winds';
-      winds.innerText = `Winds: ${days[i].windDirection} - ${days[i].windSpeed}`;
-      // append winds div to day div
-      day.appendChild(winds);
-      // create div in precipitation variable
-      let precipitation = document.createElement('div');
-      precipitation.className = 'precipitation';
-      // do two seperate things depending on if the value exists or not
-      if (
-        precipProbability.value != null ||
-        precipProbability.value != undefined
-      ) {
-        precipitation.innerText = `Probability of precipitation: ${precipProbability.value}%`;
-      } else if (
-        precipProbability.value == null ||
-        precipProbability.value == undefined
-      ) {
-        precipitation.innerText = `Probability of precipitation: 0%`;
-      }
-      // append that variable to day div
-      day.appendChild(precipitation);
-    } else if (i == 1 || tonight) {
-      // if its night weather
-      let night = document.createElement('div');
-      night.className = 'night-weather';
-      if (tonight) {
+function loadWeather() {
+  fetchData().then((forecast) => {
+    let days = forecast.slice(0, 11)
+    console.log(days);
+    for (let i = 0; i < days.length; i++) {
+      if (i == 0 && days[i].name != 'Tonight') {
+        /* if is day index */
+        //create div in weatherCard variable
         let weatherCard = document.createElement('div');
         weatherCard.className = 'card';
         weatherCard.id = 'weatherCard';
-        currentWeather.appendChild(weatherCard);
-        weatherCard.appendChild(night);
+        //create div in day variable
+        let day = document.createElement('div');
+        day.className = 'day-weather';
+        // append weatherCard div to forecastWeather div
+        forecastWeather.appendChild(weatherCard);
+        // append day div to weatherCard div
+        weatherCard.appendChild(day);
+        // create h4 in timeName variable
         let timeName = document.createElement('h4');
         timeName.className = 'time-of-day';
         timeName.innerText = days[i].name;
-        night.appendChild(timeName);
-      } else {
-        weatherCard.appendChild(night);
-        let timeName = document.createElement('h4');
-        timeName.className = 'time-of-day';
-        timeName.innerText = days[i].name;
-        night.appendChild(timeName);
+        // append timeName h4 to day div
+        day.appendChild(timeName);
+        // define precipProbability variable
+        let precipProbability = days[i].probabilityOfPrecipitation;
+        // create div in img variable that displays icon
+        let img = document.createElement('div');
+        img.className = 'icon';
+        img.style = `background-image: url("${days[i].icon}")`;
+        // append img (div) to day variable
+        day.appendChild(img);
+        // create div in condition variable
+        let condition = document.createElement('div');
+        condition.innerText = days[i].shortForecast;
+        condition.className = 'sky-condition';
+        // append condition div to day div
+        day.appendChild(condition);
+        // create div in temperature variable
+        let temperature = document.createElement('div');
+        temperature.className = 'temperature';
+        temperature.innerText = `Temperature: ${days[i].temperature}\u00B0 F`;
+        // append temperature div to day div
+        day.appendChild(temperature);
+        // create div in winds variable
+        let winds = document.createElement('div');
+        winds.className = 'winds';
+        winds.innerText = `Winds: ${days[i].windDirection} - ${days[i].windSpeed}`;
+        // append winds div to day div
+        day.appendChild(winds);
+        // create div in precipitation variable
+        let precipitation = document.createElement('div');
+        precipitation.className = 'precipitation';
+        // do two seperate things depending on if the value exists or not
+        if (
+          precipProbability.value != null ||
+          precipProbability.value != undefined
+        ) {
+          precipitation.innerText = `Probability of precipitation: ${precipProbability.value}%`;
+        } else if (
+          precipProbability.value == null ||
+          precipProbability.value == undefined
+        ) {
+          precipitation.innerText = `Probability of precipitation: 0%`;
+        }
+        // append that variable to day div
+        day.appendChild(precipitation);
+      } else if (i == 1 || days[i].name == 'Tonight') {
+        // if its night weather
+        let night = document.createElement('div');
+        night.className = 'night-weather';
+        if (days[i].name == 'Tonight') {
+          let weatherCard = document.createElement('div');
+          weatherCard.className = 'card';
+          weatherCard.id = 'weatherCard';
+          currentWeather.appendChild(weatherCard);
+          weatherCard.appendChild(night);
+          let timeName = document.createElement('h4');
+          timeName.className = 'time-of-day';
+          timeName.innerText = days[i].name;
+          night.appendChild(timeName);
+        } else {
+          weatherCard.appendChild(night);
+          let timeName = document.createElement('h4');
+          timeName.className = 'time-of-day';
+          timeName.innerText = days[i].name;
+          night.appendChild(timeName);
+        }
+        let precipProbability = days[i].probabilityOfPrecipitation;
+        let img = document.createElement('div');
+        img.className = 'icon';
+        img.style = `background-image: url("${days[i].icon}")`;
+        night.appendChild(img);
+        let condition = document.createElement('div');
+        condition.innerText = days[i].shortForecast;
+        condition.className = 'sky-condition';
+        night.appendChild(condition);
+        let temperature = document.createElement('div');
+        temperature.className = 'temperature';
+        temperature.innerText = `Temperature: ${days[i].temperature}\u00B0 F`;
+        night.appendChild(temperature);
+        let winds = document.createElement('div');
+        winds.className = 'winds';
+        winds.innerText = `Winds: ${days[i].windDirection} - ${days[i].windSpeed}`;
+        night.appendChild(winds);
+        let precipitation = document.createElement('div');
+        precipitation.className = 'precipitation';
+        if (
+          precipProbability.value != null ||
+          precipProbability.value != undefined
+        ) {
+          precipitation.innerText = `Probability of precipitation: ${precipProbability.value}%`;
+        } else if (
+          precipProbability.value == null ||
+          precipProbability.value == undefined
+        ) {
+          precipitation.innerText = `Probability of precipitation: 0%`;
+        }
+        night.appendChild(precipitation);
       }
-      let precipProbability = days[i].probabilityOfPrecipitation;
-      let img = document.createElement('div');
-      img.className = 'icon';
-      img.style = `background-image: url("${days[i].icon}")`;
-      night.appendChild(img);
-      let condition = document.createElement('div');
-      condition.innerText = days[i].shortForecast;
-      condition.className = 'sky-condition';
-      night.appendChild(condition);
-      let temperature = document.createElement('div');
-      temperature.className = 'temperature';
-      temperature.innerText = `Temperature: ${days[i].temperature}\u00B0 F`;
-      night.appendChild(temperature);
-      let winds = document.createElement('div');
-      winds.className = 'winds';
-      winds.innerText = `Winds: ${days[i].windDirection} - ${days[i].windSpeed}`;
-      night.appendChild(winds);
-      let precipitation = document.createElement('div');
-      precipitation.className = 'precipitation';
-      if (
-        precipProbability.value != null ||
-        precipProbability.value != undefined
-      ) {
-        precipitation.innerText = `Probability of precipitation: ${precipProbability.value}%`;
-      } else if (
-        precipProbability.value == null ||
-        precipProbability.value == undefined
-      ) {
-        precipitation.innerText = `Probability of precipitation: 0%`;
-      }
-      night.appendChild(precipitation);
-    }
-  }
-}
-
-function loadWeather(card) {
-  fetchData().then((forecast) => {
-    switch (card) {
-      case 1:
-        createWeatherInHTML(forecast.slice(1, 2));
-        break;
-      case 2:
-        createWeatherInHTML(forecast.slice(2, 4));
-        break;
-      case 3:
-        createWeatherInHTML(forecast.slice(4, 6));
-        break;
-      case 4:
-        createWeatherInHTML(forecast.slice(6, 8));
-        break;
-      case 5:
-        createWeatherInHTML(forecast.slice(8, 10));
-        break;
-      default:
-        alert('Error making html');
-        break;
     }
   });
 }
@@ -248,10 +220,6 @@ cityDropdown.onchange = function () {
     document.querySelector('.container>.card').style.display = 'block';
     currentWeather.innerHTML = ' ';
     forecastWeather.innerHTML = ' ';
-    loadWeather(1);
-    loadWeather(2);
-    loadWeather(3);
-    loadWeather(4);
-    loadWeather(5);
+    loadWeather();
   }
 };
