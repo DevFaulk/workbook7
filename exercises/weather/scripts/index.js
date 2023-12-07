@@ -366,8 +366,10 @@ cityDropdown.onchange = function () {
     forecastWeather[7].innerHTML = ' ';
     loadWeather();
     cityDropdown.style.display = 'none';
+    document.querySelector('.dropdown>img').style.display = 'block';
     setTimeout(function () {
       cityDropdown.style.display = 'block';
+      document.querySelector('.dropdown>img').style.display = 'none';
     }, 1000);
   }
 };
