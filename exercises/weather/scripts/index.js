@@ -50,8 +50,14 @@ const cities = [
   { name: 'Madison, WI', lat: 43.0746, long: -89.384 },
   { name: 'Cheyenne, WY', lat: 41.1399, long: -104.8202 },
 ];
-const forecastWeather = document.getElementById('forecastWeather');
 let locationName = document.getElementById('location');
+let currentWeather = document.getElementById('currentWeather');
+let forecastWeather = {
+  1: document.getElementById('forecastWeather1'),
+  2: document.getElementById('forecastWeather2'),
+  3: document.getElementById('forecastWeather3'),
+  4: document.getElementById('forecastWeather4'),
+};
 /* dropdown ---------------------- dropdown */
 
 const cityDropdown = document.getElementById('cityDropdown');
@@ -103,18 +109,13 @@ function loadWeather() {
         windSpeed: 'None forecasted',
       });
     }
-    for (let i = 0; i < days.length; i++) {
+    for (let i = 0; i < 5; i++) {
       if (days[i].name.includes('Tonight') == true) {
         //create div in weatherCard variable
-        let TonightWeatherCard = document.createElement('div');
-        TonightWeatherCard.className = 'card';
-        TonightWeatherCard.id = 'TonightWeatherCard';
-        // append weatherCard div to forecastWeather div
-        forecastWeather.appendChild(TonightWeatherCard);
         let night = document.createElement('div');
         night.className = 'night-weather';
         // append night div to weatherCard div
-        TonightWeatherCard.appendChild(night);
+        currentWeather.appendChild(night);
         // create h4 in timeName variable
         let timeName = document.createElement('h4');
         timeName.className = 'time-of-day';
@@ -165,18 +166,12 @@ function loadWeather() {
         // append that variable to night div
         night.appendChild(precipitation);
       }
-      if (days[i].name != 'Tonight' && days[i].name.includes('Night') == true) {
-        console.log('hey')
-        //create div in weatherCard variable
-        let weatherCard = document.createElement('div');
-        weatherCard.className = 'card';
-        weatherCard.id = 'weatherCard';
-        // append weatherCard div to forecastWeather div
-        forecastWeather.appendChild(weatherCard);
+      if (days[i].name.includes('Night') == true) {
+        console.log(forecastWeather[i]);
         let night = document.createElement('div');
         night.className = 'night-weather';
         // append night div to weatherCard div
-        weatherCard.appendChild(night);
+        forecastWeather[i].appendChild(night);
         // create h4 in timeName variable
         let timeName = document.createElement('h4');
         timeName.className = 'time-of-day';
@@ -231,12 +226,12 @@ function loadWeather() {
         days[i].name != 'Tonight' &&
         days[i].name.includes('Night') == false
       ) {
-        console.log(days[i].name.includes('Night'));
+        console.log(forecastWeather[i])
         //create div in day variable
         let day = document.createElement('div');
         day.className = 'day-weather';
         // append day div to weatherCard div
-        weatherCard.appendChild(day);
+        forecastWeather[i].appendChild(day);
         // create h4 in timeName variable
         let timeName = document.createElement('h4');
         timeName.className = 'time-of-day';
@@ -302,7 +297,10 @@ cityDropdown.onchange = function () {
       }
     }
     document.querySelector('.container>.card').style.display = 'block';
-    forecastWeather.innerHTML = ' ';
+    forecastWeather[1].innerHTML = ' ';
+    forecastWeather[2].innerHTML = ' ';
+    forecastWeather[3].innerHTML = ' ';
+    forecastWeather[4].innerHTML = ' ';
     loadWeather();
   }
 };
