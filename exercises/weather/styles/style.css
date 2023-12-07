@@ -4,3 +4,12 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.forecast-weather {
+    display: flex;
+    flex-direction: row;
+}
+
+.night-weather, .day-weather {
+    flex-grow: 1;
+}
