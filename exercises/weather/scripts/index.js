@@ -52,7 +52,6 @@ const cities = [
 ];
 const currentWeather = document.getElementById('currentWeather');
 const forecastWeather = document.getElementById('forecastWeather');
-const weatherCard = document.getElementById('weatherCard');
 let locationName = document.getElementById('location');
 /* dropdown ---------------------- dropdown */
 
@@ -86,37 +85,62 @@ async function fetchData() {
 
 function createWeatherInHTML(days) {
   for (let i = 0; i < days.length; i++) {
-    let weatherCard = document.createElement('div');
-    weatherCard.className = 'card';
-    if (days[i][0]) {
+    let tonight = function () {
+      if (days[i].name == tonight && days[i].number == 2) {
+        tonight = days[i].number == 2;
+      } else if (days[i].name == tonight && days[i].number == 1) {
+        tonight = days[i].number == 1;
+      }
+    };
+    if (i == 0 && !tonight) {
+      /* if is day index */
+      //create div in weatherCard variable
+      let weatherCard = document.createElement('div');
+      weatherCard.className = 'card';
+      weatherCard.id = 'weatherCard';
+      //create div in day variable
       let day = document.createElement('div');
       day.className = 'day-weather';
-
+      // append weatherCard div to forecastWeather div
       forecastWeather.appendChild(weatherCard);
+      // append day div to weatherCard div
       weatherCard.appendChild(day);
+      // create h4 in timeName variable
       let timeName = document.createElement('h4');
       timeName.className = 'time-of-day';
       timeName.innerText = days[i].name;
+      // append timeName h4 to day div
       day.appendChild(timeName);
-
+      // define precipProbability variable
       let precipProbability = days[i].probabilityOfPrecipitation;
+      // create div in img variable that displays icon
       let img = document.createElement('div');
       img.className = 'icon';
       img.style = `background-image: url("${days[i].icon}")`;
+      // append img (div) to day variable
       day.appendChild(img);
+      // create div in condition variable
       let condition = document.createElement('div');
       condition.innerText = days[i].shortForecast;
       condition.className = 'sky-condition';
+      // append condition div to day div
       day.appendChild(condition);
+      // create div in temperature variable
       let temperature = document.createElement('div');
       temperature.className = 'temperature';
       temperature.innerText = `Temperature: ${days[i].temperature}\u00B0 F`;
+      // append temperature div to day div
       day.appendChild(temperature);
+      // create div in winds variable
       let winds = document.createElement('div');
       winds.className = 'winds';
       winds.innerText = `Winds: ${days[i].windDirection} - ${days[i].windSpeed}`;
+      // append winds div to day div
+      day.appendChild(winds);
+      // create div in precipitation variable
       let precipitation = document.createElement('div');
       precipitation.className = 'precipitation';
+      // do two seperate things depending on if the value exists or not
       if (
         precipProbability.value != null ||
         precipProbability.value != undefined
@@ -128,11 +152,16 @@ function createWeatherInHTML(days) {
       ) {
         precipitation.innerText = `Probability of precipitation: 0%`;
       }
+      // append that variable to day div
       day.appendChild(precipitation);
-    } else {
+    } else if (i == 1 || tonight) {
+      // if its night weather
       let night = document.createElement('div');
       night.className = 'night-weather';
-      if (days[i].number == 2) {
+      if (tonight) {
+        let weatherCard = document.createElement('div');
+        weatherCard.className = 'card';
+        weatherCard.id = 'weatherCard';
         currentWeather.appendChild(weatherCard);
         weatherCard.appendChild(night);
         let timeName = document.createElement('h4');
@@ -140,7 +169,6 @@ function createWeatherInHTML(days) {
         timeName.innerText = days[i].name;
         night.appendChild(timeName);
       } else {
-        forecastWeather.appendChild(weatherCard);
         weatherCard.appendChild(night);
         let timeName = document.createElement('h4');
         timeName.className = 'time-of-day';
@@ -163,6 +191,7 @@ function createWeatherInHTML(days) {
       let winds = document.createElement('div');
       winds.className = 'winds';
       winds.innerText = `Winds: ${days[i].windDirection} - ${days[i].windSpeed}`;
+      night.appendChild(winds);
       let precipitation = document.createElement('div');
       precipitation.className = 'precipitation';
       if (
@@ -208,7 +237,7 @@ function loadWeather(card) {
 
 cityDropdown.onchange = function () {
   if (cityDropdown.value == 'select') {
-    weatherCard.style.display = 'none';
+    document.querySelector('.container>.card').style.display = 'none';
   }
   if (cityDropdown.value != 'select') {
     for (const city of cities) {
@@ -216,7 +245,7 @@ cityDropdown.onchange = function () {
         locationName.innerText = city.name;
       }
     }
-    weatherCard.style.display = 'block';
+    document.querySelector('.container>.card').style.display = 'block';
     currentWeather.innerHTML = ' ';
     forecastWeather.innerHTML = ' ';
     loadWeather(1);
