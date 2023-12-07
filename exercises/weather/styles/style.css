@@ -1,20 +1,27 @@
-body{
-    display: flex;
-    flex-direction: column;
+body {
+  display: flex;
+  flex-direction: column;
 }
 
-header, h4 {
-    text-align: center;
+header,
+h4 {
+  text-align: center;
 }
 
 select {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
-.location{
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
+.dropdown > img {
+  height: 80px;
+  width: 80px;
+  margin: auto;
+}
+
+.location {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .icon {
@@ -25,10 +32,11 @@ select {
 }
 
 .forecast-weather {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
-.night-weather, .day-weather {
-    flex-grow: 1;
+.night-weather,
+.day-weather {
+  flex-grow: 1;
 }
