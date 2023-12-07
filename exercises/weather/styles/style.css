@@ -45,25 +45,20 @@ select {
   margin-top: 2rem;
 }
 
+.forecast-weather-card {
+  height: 200px;
+}
+
 .card-background {
   z-index: -1;
   width: 100%;
-  height: 300px;
+  height: 50vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-#currentWeather,
-#forecastWeather1,
-#forecastWeather2,
-#forecastWeather3,
-#forecastWeather4:hover {
-  backdrop-filter: none;
-}
-
 .day-weather {
-  background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
   color: white;
   font-weight: bold;
@@ -74,11 +69,11 @@ select {
   transform: translate(-50%, -50%);
   z-index: 2;
   width: 50%;
+  height: 100%;
   text-align: center;
   flex-grow: 1;
 }
 .night-weather {
-  background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
   color: white;
   font-weight: bold;
@@ -89,11 +84,11 @@ select {
   transform: translate(-50%, -50%);
   z-index: 2;
   width: 50%;
+  height: 100%;
   text-align: center;
   flex-grow: 1;
 }
 #currentWeather > .night-weather {
-  background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
   color: white;
   font-weight: bold;
@@ -104,6 +99,7 @@ select {
   transform: translate(-50%, -50%);
   z-index: 2;
   width: 100%;
+  height: 100%;
   text-align: center;
 }
 
@@ -116,7 +112,7 @@ select {
   display: flex;
   flex-direction: row;
   text-align: center;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   transition: 100ms backdrop-filter linear;
 }
