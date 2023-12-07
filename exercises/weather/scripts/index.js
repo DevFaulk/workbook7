@@ -53,6 +53,7 @@ const cities = [
 let dropdown = document.querySelector('.dropdown');
 let locationName = document.getElementById('location');
 let currentWeather = document.getElementById('currentWeather');
+let currentWeatherBackground = document.querySelector('.current-weather');
 let forecastWeather = {
   1: document.getElementById('forecastWeather1'),
   3: document.getElementById('forecastWeather2'),
@@ -119,6 +120,10 @@ function loadWeather() {
       //tonight or overnight
       if (i == 0) {
         //create div in weatherCard variable
+        let cardBackground = document.createElement('div');
+        cardBackground.className = 'card-background';
+        cardBackground.style = `background-image: url("${days[i].icon}")`;
+        currentWeather.appendChild(cardBackground);
         let night = document.createElement('div');
         night.className = 'night-weather';
         // append night div to weatherCard div
@@ -175,6 +180,10 @@ function loadWeather() {
       }
       //night forecast
       if (/*night forecast day 1*/ i == 2 || i == 4 || i == 6 || i == 8) {
+        let cardBackground = document.createElement('div');
+        cardBackground.className = 'card-background';
+        cardBackground.style = `background-image: url("${days[i].icon}")`;
+        forecastWeather[i - 1].appendChild(cardBackground);
         let night = document.createElement('div');
         night.className = 'night-weather';
         // append night div to weatherCard div
@@ -232,6 +241,10 @@ function loadWeather() {
       // day forecast after day 2
       if (i == 3 || i == 5 || i == 7) {
         //create div in day variable
+        let cardBackground = document.createElement('div');
+        cardBackground.className = 'card-background';
+        cardBackground.style = `background-image: url("${days[i].icon}")`;
+        forecastWeather[i].appendChild(cardBackground);
         let day = document.createElement('div');
         day.className = 'day-weather';
         // append day div to weatherCard div
@@ -289,6 +302,10 @@ function loadWeather() {
       // day 1 forecast
       if (i == 1) {
         //create div in day variable
+        let cardBackground = document.createElement('div');
+        cardBackground.className = 'card-background';
+        cardBackground.style = `background-image: url("${days[i].icon}")`;
+        forecastWeather[1].appendChild(cardBackground);
         let day = document.createElement('div');
         day.className = 'day-weather';
         // append day div to weatherCard div
