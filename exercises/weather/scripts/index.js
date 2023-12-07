@@ -104,11 +104,69 @@ function loadWeather() {
       });
     }
     for (let i = 0; i < days.length; i++) {
-      if (
-        days[i].name.includes('night') == true ||
-        days[i].name.includes('Night') == true
-      ) {
-        console.log(days[i].name);
+      if (days[i].name.includes('Tonight') == true) {
+        //create div in weatherCard variable
+        let TonightWeatherCard = document.createElement('div');
+        TonightWeatherCard.className = 'card';
+        TonightWeatherCard.id = 'TonightWeatherCard';
+        // append weatherCard div to forecastWeather div
+        forecastWeather.appendChild(TonightWeatherCard);
+        let night = document.createElement('div');
+        night.className = 'night-weather';
+        // append night div to weatherCard div
+        TonightWeatherCard.appendChild(night);
+        // create h4 in timeName variable
+        let timeName = document.createElement('h4');
+        timeName.className = 'time-of-day';
+        timeName.innerText = days[i].name;
+        // append timeName h4 to day div
+        night.appendChild(timeName);
+        // define precipProbability variable
+        let precipProbability = days[i].probabilityOfPrecipitation;
+        // create div in img variable that displays icon
+        let img = document.createElement('div');
+        img.className = 'icon';
+        img.style = `background-image: url("${days[i].icon}")`;
+        // append img (div) to night variable
+        night.appendChild(img);
+        // create div in condition variable
+        let condition = document.createElement('div');
+        condition.innerText = days[i].shortForecast;
+        condition.className = 'sky-condition';
+        // append condition div to night div
+        night.appendChild(condition);
+        // create div in temperature variable
+        let temperature = document.createElement('div');
+        temperature.className = 'temperature';
+        temperature.innerText = `Temperature: ${days[i].temperature}\u00B0 F`;
+        // append temperature div to night div
+        night.appendChild(temperature);
+        // create div in winds variable
+        let winds = document.createElement('div');
+        winds.className = 'winds';
+        winds.innerText = `Winds: ${days[i].windDirection} - ${days[i].windSpeed}`;
+        // append winds div to night div
+        night.appendChild(winds);
+        // create div in precipitation variable
+        let precipitation = document.createElement('div');
+        precipitation.className = 'precipitation';
+        // do two seperate things depending on if the value exists or not
+        if (
+          precipProbability.value != null ||
+          precipProbability.value != undefined
+        ) {
+          precipitation.innerText = `Probability of precipitation: ${precipProbability.value}%`;
+        } else if (
+          precipProbability.value == null ||
+          precipProbability.value == undefined
+        ) {
+          precipitation.innerText = `Probability of precipitation: 0%`;
+        }
+        // append that variable to night div
+        night.appendChild(precipitation);
+      }
+      if (days[i].name != 'Tonight' && days[i].name.includes('Night') == true) {
+        console.log('hey')
         //create div in weatherCard variable
         let weatherCard = document.createElement('div');
         weatherCard.className = 'card';
@@ -117,8 +175,6 @@ function loadWeather() {
         forecastWeather.appendChild(weatherCard);
         let night = document.createElement('div');
         night.className = 'night-weather';
-        // append weatherCard div to forecastWeather div
-        forecastWeather.appendChild(weatherCard);
         // append night div to weatherCard div
         weatherCard.appendChild(night);
         // create h4 in timeName variable
@@ -170,7 +226,12 @@ function loadWeather() {
         }
         // append that variable to night div
         night.appendChild(precipitation);
-      } else {
+      }
+      if (
+        days[i].name != 'Tonight' &&
+        days[i].name.includes('Night') == false
+      ) {
+        console.log(days[i].name.includes('Night'));
         //create div in day variable
         let day = document.createElement('div');
         day.className = 'day-weather';
