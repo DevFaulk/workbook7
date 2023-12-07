@@ -90,12 +90,17 @@ async function fetchData() {
 
 function loadWeather() {
   fetchData().then((forecast) => {
-    let days = forecast.slice(1, 12);
-    if (days[0].name !== 'Tonight') {
+    let days = forecast.slice(0, 12);
+    console.log(days[0]);
+    console.log(days[1]);
+    if (
+      days[0].name.includes('Tonight') == false &&
+      days[0].name.includes('Overnight') == false
+    ) {
       days.unshift({
         number: 1,
         name: 'Tonight',
-        icon: '/images/No-Image-Placeholder.svg',
+        icon: './images/No-Image-Placeholder.svg.png',
         isDaytime: false,
         name: 'Tonight',
         number: 1,
@@ -110,7 +115,7 @@ function loadWeather() {
       });
     }
     for (let i = 0; i < 9; i++) {
-      //tonight
+      //tonight or overnight
       if (i == 0) {
         //create div in weatherCard variable
         let night = document.createElement('div');
@@ -360,5 +365,9 @@ cityDropdown.onchange = function () {
     forecastWeather[5].innerHTML = ' ';
     forecastWeather[7].innerHTML = ' ';
     loadWeather();
+    cityDropdown.style.display = 'none';
+    setTimeout(function () {
+      cityDropdown.style.display = 'block';
+    }, 1000);
   }
 };
