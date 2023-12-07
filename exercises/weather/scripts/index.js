@@ -50,6 +50,7 @@ const cities = [
   { name: 'Madison, WI', lat: 43.0746, long: -89.384 },
   { name: 'Cheyenne, WY', lat: 41.1399, long: -104.8202 },
 ];
+let dropdown = document.querySelector('.dropdown');
 let locationName = document.getElementById('location');
 let currentWeather = document.getElementById('currentWeather');
 let forecastWeather = {
@@ -366,10 +367,15 @@ cityDropdown.onchange = function () {
     forecastWeather[7].innerHTML = ' ';
     loadWeather();
     cityDropdown.style.display = 'none';
-    document.querySelector('.dropdown>img').style.display = 'block';
+
+    let loadCircle = document.createElement('img');
+    loadCircle.src = 'images/Rolling-1s-200px.gif';
+    loadCircle.alt = 'loading circle';
+    dropdown.appendChild(loadCircle);
+
     setTimeout(function () {
+      dropdown.removeChild(loadCircle);
       cityDropdown.style.display = 'block';
-      document.querySelector('.dropdown>img').style.display = 'none';
     }, 1000);
   }
 };
