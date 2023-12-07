@@ -1,3 +1,22 @@
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+header, h4 {
+    text-align: center;
+}
+
+select {
+    font-size: 1.5rem;
+}
+
+.location{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 .icon {
   height: 128px;
   width: 128px;

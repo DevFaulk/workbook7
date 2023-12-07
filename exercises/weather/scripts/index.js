@@ -91,11 +91,11 @@ async function fetchData() {
 function loadWeather() {
   fetchData().then((forecast) => {
     let days = forecast.slice(1, 12);
-    if (days[0].name != 'Tonight') {
+    if (days[0].name !== 'Tonight') {
       days.unshift({
         number: 1,
         name: 'Tonight',
-        icon: 'https://api.weather.gov/icons/land/night/rain_showers,90/rain_showers,80?size=medium',
+        icon: '/images/No-Image-Placeholder.svg',
         isDaytime: false,
         name: 'Tonight',
         number: 1,
@@ -344,6 +344,7 @@ function loadWeather() {
 cityDropdown.onchange = function () {
   if (cityDropdown.value == 'select') {
     document.querySelector('.container>.card').style.display = 'none';
+    document.querySelector('.content-header').style.display = 'block';
   }
   if (cityDropdown.value != 'select') {
     for (const city of cities) {
@@ -351,8 +352,13 @@ cityDropdown.onchange = function () {
         locationName.innerText = city.name;
       }
     }
+    document.querySelector('.content-header').style.display = 'none';
     document.querySelector('.container>.card').style.display = 'block';
-    document.querySelectorAll('.card-body>#forecastWeather').innerHTML = ' ';
+    currentWeather.innerHTML = ' ';
+    forecastWeather[1].innerHTML = ' ';
+    forecastWeather[3].innerHTML = ' ';
+    forecastWeather[5].innerHTML = ' ';
+    forecastWeather[7].innerHTML = ' ';
     loadWeather();
   }
 };
