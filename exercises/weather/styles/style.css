@@ -2,9 +2,12 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: #111010;
+  margin: 0;
 }
 
 * {
+  color: #fffefe;
   box-sizing: border-box;
 }
 
@@ -13,7 +16,15 @@ h4 {
   text-align: center;
 }
 
-select {
+.card.card.card-shadow {
+  background-image: linear-gradient(280deg, #5d5d5d70, #2e272764);
+  border-radius: 2rem;
+}
+
+select,
+option,
+.card.card-shadow {
+  color: #212121;
   font-size: 1.5rem;
 }
 
@@ -21,12 +32,16 @@ select {
   height: 80px;
   width: 80px;
   margin: auto;
+  background: transparent;
 }
 
 .location {
   text-align: center;
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 3rem;
+  font-weight: bolder;
+  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
+  padding-top: 1.5rem;
+  padding-bottom: 1.1rem;
 }
 
 .icon {
@@ -52,7 +67,7 @@ select {
 .card-background {
   z-index: -1;
   width: 100%;
-  height: 50vh;
+  height: 40vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -88,6 +103,12 @@ select {
   text-align: center;
   flex-grow: 1;
 }
+
+.night-weather > *,
+.day-weather > * {
+  color: white;
+}
+
 #currentWeather > .night-weather {
   background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
   color: white;
